@@ -1,58 +1,16 @@
 import { useState } from "react";
-import TemplatePreview from "./TemplatePreview";
+import TemplatePreviewWithExport from "./TemplatePreviewWithExport";
 import TemplateSelector from "./TemplateSelector";
+import { useResume } from '../context/ResumeContext';
 
 const ResumeEditor = () => {
-  const [userInfo, setUserInfo] = useState({
-    name: "Faruoq Muhammed",
-    title: "Software Engineer",
-    email: "faruoqmuhammed@gmail.com",
-    phone: "08012345678",
-    LinkedIn: "https://www.linkedin.com/in/faruoqmuhammed",
-    github: "faruoqmuhammed",
-    summary:
-      "A software engineer with 5 years of experience in building web applications. Proficient in JavaScript, React, and Node.js.",
-    skills: ["JavaScript", "React", "Node.js", "Express.js"],
-    experience: [
-      {
-        id: 1,
-        title: "Software Engineer",
-        company: "Tech Solutions",
-        location: "Lagos, Nigeria",
-        startDate: "2018-06-01",
-        endDate: "2020-06-01",
-        description:
-          "Developed and maintained web applications for clients. Collaborated with the design team to create user-friendly interfaces.",
-      },
-      {
-        id: 2,
-        title: "Frontend Developer",
-        company: "Web Designs",
-        location: "Abuja, Nigeria",
-        startDate: "2016-06-01",
-        endDate: "2018-06-01",
-        description:
-          "Built responsive websites using HTML, CSS, and JavaScript. Worked closely with the backend team to integrate APIs.",
-      },
-    ],
-    education: [
-      {
-        degree: "BSc Computer Science",
-        school: "University of Nairobi",
-        location: "Nairobi, Kenya",
-        year: "2016",
-      },
-    ],
-    certifications: ["React Developer Certification", "Node.js Certification"],
-  });
-
+  const { userInfo, setUserInfo } = useResume();
   const [selectedTemplate, setSelectedTemplate] = useState("template1");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUserInfo({ ...userInfo, [name]: value });
   };
-
   return (
     <div className="flex flex-col lg:flex-row gap-6 p-6">
       {/* Editor Panel */}
@@ -91,13 +49,16 @@ const ResumeEditor = () => {
         </div>
       </div>
 
-      {/* Template Preview */}
+      {/* Template Preview with Export */}
       <div className="w-full lg:w-2/3 bg-gray-50 p-4 rounded shadow">
         <TemplateSelector
           selectedTemplate={selectedTemplate}
           setSelectedTemplate={setSelectedTemplate}
         />
-        <TemplatePreview userInfo={userInfo} template={selectedTemplate} />
+        <TemplatePreviewWithExport
+          userInfo={userInfo}
+          template={selectedTemplate}
+        />
       </div>
     </div>
   );

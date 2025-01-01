@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import ResumeEditor from "../components/ResumeEditor";
+
+// import ResumeEditor from "../components/ResumeEditor";
 
 const Dashboard = () => {
   return (
@@ -10,12 +11,7 @@ const Dashboard = () => {
             RESUME-LIVE
           </Link>
           <div className="flex space-x-6">
-            <Link
-              to="/about"
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              Home
-            </Link>
+           
             <Link
               to="/features"
               className="text-gray-600 hover:text-gray-800 transition duration-300"
@@ -28,33 +24,22 @@ const Dashboard = () => {
             >
               Pricing
             </Link>
-            <Link
-              to="/login"
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              Login
-            </Link>
-            <Link
-              to="/register"
-              className="text-gray-600 hover:text-gray-800 transition duration-300"
-            >
-              Register
-            </Link>
+            
           </div>
         </div>
       </nav>
 
       <div className="flex flex-row pt-16">
-        <sidebar
+        <div
           className="bg-gray-800 text-white fixed top-16 left-0 h-screen w-[250px] z-10 shadow-md mt-2 ml-2 rounded-md "
           role="complementary"
         >
           <ul className="container mx-auto">
-            <li className="p-4 hover:bg-gray-700">Dashboard</li>
-            <li className="p-4 hover:bg-gray-700">ProfileSetting</li>
-            <li className="p-4 hover:bg-gray-700">Analytic and Share</li>
+            <li className="p-4 hover:bg-gray-700"> <Link to="/dashboard">Dashboard</Link></li>
+            <li className="p-4 hover:bg-gray-700">  <Link to="/profilesetting">ProfileSetting</Link></li>
+            <li className="p-4 hover:bg-gray-700"> <Link to="/analytic">Analytic</Link></li>
           </ul>
-        </sidebar>
+        </div>
 
         <main
           className="text-gray-800 p-4 w-full ml-[250px] h-screen mt-5"
@@ -63,7 +48,7 @@ const Dashboard = () => {
           <h1 className="text-4xl">Dashboard</h1>
           <div>
             <h2 className="text-2xl mb-4">Choose a Resume Template</h2>
-            <ResumeEditor />
+            {/* <ResumeEditor /> */}
           </div>
         </main>
       </div>
