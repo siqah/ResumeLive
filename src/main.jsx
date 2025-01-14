@@ -4,7 +4,6 @@ import 'tailwindcss/tailwind.css'
 import {BrowserRouter} from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import './components/templates.css'
 
 import { ResumeProvider } from "./contexts/ResumeContext.jsx"
 

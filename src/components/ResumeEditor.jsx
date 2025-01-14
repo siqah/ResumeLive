@@ -1,65 +1,60 @@
-import { useState } from "react";
-import TemplatePreviewWithExport from "./TemplatePreviewWithExport";
-import TemplateSelector from "./TemplateSelector";
-import { useResume } from '../context/ResumeContext';
+
+
+import  { useState } from 'react';
 
 const ResumeEditor = () => {
-  const { userInfo, setUserInfo } = useResume();
-  const [selectedTemplate, setSelectedTemplate] = useState("template1");
+  const [resume, setResume] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    education: '',
+    experience: '',
+    skills: ''
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUserInfo({ ...userInfo, [name]: value });
+    setResume({
+      ...resume,
+      [name]: value
+    });
   };
-  return (
-    <div className="flex flex-col lg:flex-row gap-6 p-6">
-      {/* Editor Panel */}
-      <div className="w-full lg:w-1/3 bg-white p-4 rounded shadow">
-        <h2 className="text-xl font-bold mb-4">Resume Editor</h2>
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium">Name</label>
-            <input
-              type="text"
-              name="name"
-              value={userInfo.name}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Email</label>
-            <input
-              type="email"
-              name="email"
-              value={userInfo.email}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium">Summary</label>
-            <textarea
-              name="summary"
-              value={userInfo.summary}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-        </div>
-      </div>
 
-      {/* Template Preview with Export */}
-      <div className="w-full lg:w-2/3 bg-gray-50 p-4 rounded shadow">
-        <TemplateSelector
-          selectedTemplate={selectedTemplate}
-          setSelectedTemplate={setSelectedTemplate}
-        />
-        <TemplatePreviewWithExport
-          userInfo={userInfo}
-          template={selectedTemplate}
-        />
-      </div>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Resume submitted:', resume);
+  };
+
+  return (
+    <div>
+      <h2>Resume Editor</h2>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Name:</label>
+          <input type="text" name="name" value={resume.name} onChange={handleChange} />
+        </div>
+        <div>
+          <label>Email:</label>
+          <input type="email" name="email" value={resume.email} onChange={handleChange} />
+        </div>
+        <div>
+          <label>Phone:</label>
+          <input type="text" name="phone" value={resume.phone} onChange={handleChange} />
+        </div>
+        <div>
+          <label>Education:</label>
+          <textarea name="education" value={resume.education} onChange={handleChange}></textarea>
+        </div>
+        <div>
+          <label>Experience:</label>
+          <textarea name="experience" value={resume.experience} onChange={handleChange}></textarea>
+        </div>
+        <div>
+          <label>Skills:</label>
+          <textarea name="skills" value={resume.skills} onChange={handleChange}></textarea>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
     </div>
   );
 };
